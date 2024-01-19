@@ -1,12 +1,11 @@
 package mse.imini.backend.bean;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Actualite {
@@ -17,6 +16,9 @@ public class Actualite {
     private String titre;
     private String contenu;
     private Date datePublication;
+
+    @OneToMany(mappedBy = "actualite", cascade = CascadeType.ALL)
+    private List<Image> images = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -48,5 +50,13 @@ public class Actualite {
 
     public void setDatePublication(Date datePublication) {
         this.datePublication = datePublication;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
     }
 }
